@@ -10,7 +10,7 @@ from sqlalchemy.orm import sessionmaker
 load_dotenv()
 
 # Lee la URL desde env (con fallback local)
-DATABASE_URL = os.getenv( "DATABASE_URL")
+DATABASE_URL = os.getenv( "CUSTOM_DATABASE_URL")
 # local: DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://postgres:pgadmin@localhost:5433/postgres")
 # postgresql+asyncpg://usuario:contraseña@host:5432/basededatos
 
