@@ -6,14 +6,13 @@ from sqlmodel import SQLModel
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
 from sqlalchemy.orm import sessionmaker
 
-# Carga .env en local (en Render no hace falta; Render ya inyecta env vars)
+# Carga .env en local
 load_dotenv()
 
 # Lee la URL desde env (con fallback local)
-DATABASE_URL = os.getenv(
-    "DATABASE_URL",
-    ""
-)
+DATABASE_URL = os.getenv( "DATABASE_URL")
+# local: DATABASE_URL = os.getenv("DATABASE_URL", "postgresql+asyncpg://postgres:pgadmin@localhost:5433/postgres")
+# postgresql+asyncpg://usuario:contraseña@host:5432/basededatos
 
 # NOTA SSL:
 # - Si conectas a un Postgres externo que exige SSL con asyncpg,
