@@ -15,7 +15,7 @@ import logging
 
 from sqlmodel import Session, select
 import torch
-from torchvision import transforms # Seguiremos usando esto para el preprocesamiento
+from torchvision import transforms # Para preprocesamiento de imagenes
 from PIL import Image
 from io import BytesIO
 import os
@@ -26,20 +26,18 @@ from models import Trabajador, LecturaEstres, Sesion, Cuestionario
 # QUITAR IMPORTACIONES DE FASTAI SI SOLO CARGAMOS UN nn.Module
 # from fastai.vision.all import load_learner, PILImage # << YA NO LAS NECESITAMOS (probablemente)
 
-# --- CONFIGURACIÓN ---
+# --- CONFIGURACIÓN PARA DETECTAR EL MODELO ---
 MODEL_DIR = os.path.dirname(__file__)
-# Corregir el path para que no tenga "./" extra, aunque debería funcionar igual
 MODEL_PATH = os.path.join(MODEL_DIR, "stress.pth")
-# O más simple si stress.pth está junto a main.py:
-# MODEL_PATH = "stress.pth" # O os.path.join(os.path.dirname(__file__), "stress.pth")
+
 
 CLASSES = ["No Estrés", "Estrés"]
 
-# Las transformaciones de torchvision ahora serán CLAVE
+# Transformaciones con torchvision 
 transform = transforms.Compose([
-    transforms.Resize((224, 224)), # Asegúrate que esto coincida con el entrenamiento
+    transforms.Resize((224, 224)), # Cambiar resolucion
     transforms.ToTensor(),
-    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]) # Y esto también
+    transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]) # 
 ])
 
 
@@ -55,7 +53,6 @@ class UserCreate(BaseModel):
     horas_trabajo_semanal: Optional[int] = None
     horas_descanso_dia: Optional[int] = None
     
-# main.py
 
 class TrabajadorPublic(BaseModel):
     trabajador_id: int
@@ -962,8 +959,6 @@ async def create_cuestionario(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail="Error interno al guardar el cuestionario."
         )
-
-
 
 
 if __name__ == "__main__":
