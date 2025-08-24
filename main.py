@@ -29,7 +29,7 @@ from models import Trabajador, LecturaEstres, Sesion, Cuestionario
 # --- CONFIGURACIÓN PARA DETECTAR EL MODELO ---
 MODEL_DIR = os.path.dirname(__file__)
 MODEL_PATH = os.path.join(MODEL_DIR, "stress.pth")
-
+print(f"Tamaño del archivo: {os.path.getsize(MODEL_PATH)} bytes")
 
 CLASSES = ["No Estrés", "Estrés"]
 
