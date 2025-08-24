@@ -159,7 +159,7 @@ except Exception as e_general:
 app = FastAPI()
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["https://stress-scan-frontend-483d15cd0e76.herokuapp.com/"], # Conexion frontend. Para local usar "*"
+    allow_origins=["*"], # Conexion frontend: https://stress-scan-frontend-483d15cd0e76.herokuapp.com. Para local usar "
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
